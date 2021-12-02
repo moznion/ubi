@@ -1,25 +1,11 @@
-# ubi
-
-URL Builder with Immutability for golang.
-
-This URL builder behaves with immutability; this implies all of the methods return a new Builder instance.
-It would be useful because every phase remembers its own state.
-
-## Synopsis
-
-Basic Usage:
-
-```go
-package main
+package ubi
 
 import (
 	"fmt"
 	"net/url"
-
-	"github.com/moznion/ubi"
 )
 
-func main() {
+func ExampleNewBuilder() {
 	b := NewBuilder(url.URL{})
 	u := b.SetScheme("https").
 		SetHost("example.com:8080").
@@ -31,24 +17,7 @@ func main() {
 		URL()
 	fmt.Printf("%s\n", u)
 
-	// Output:
-	// https://example.com:8080/foo/bar/buz/qux?q1=v1&q2=v2-1&q2=v2-2&q3=v3#frag
-}
-```
-
-Example of immutability:
-
-```go
-package main
-
-import (
-	"fmt"
-	"net/url"
-
-	"github.com/moznion/ubi"
-)
-
-func main() {
+	// example of immutability
 	b0 := NewBuilder(url.URL{})
 	b1 := b0.SetScheme("https").
 		SetHost("example.com")
@@ -59,19 +28,8 @@ func main() {
 	fmt.Printf("b2 (new one): %s\n", b2.URL())
 
 	// Output:
+	// https://example.com:8080/foo/bar/buz/qux?q1=v1&q2=v2-1&q2=v2-2&q3=v3#frag
 	// b1: https://example.com
 	// b1 (immutable: previous one still remembers the state): https://example.com
 	// b2 (new one): https://example.com:8080
 }
-```
-
-Examples are [here](./examples_test.go).
-
-## Documentations
-
-[![GoDoc](https://godoc.org/github.com/moznion/ubi?status.svg)](https://godoc.org/github.com/moznion/ubi)
-
-## Author
-
-moznion (<moznion@mail.moznion.net>)
-
