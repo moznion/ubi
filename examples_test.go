@@ -6,7 +6,7 @@ import (
 )
 
 func ExampleNewBuilder() {
-	b := NewBuilder(url.URL{})
+	b := NewBuilder(&url.URL{}) // or the parameter can be nil
 	u := b.SetScheme("https").
 		SetHost("example.com:8080").
 		SetPaths("foo", "bar").
@@ -18,7 +18,7 @@ func ExampleNewBuilder() {
 	fmt.Printf("%s\n", u)
 
 	// example of immutability
-	b0 := NewBuilder(url.URL{})
+	b0 := NewBuilder(&url.URL{})
 	b1 := b0.SetScheme("https").
 		SetHost("example.com")
 	fmt.Printf("b1: %s\n", b1.URL())

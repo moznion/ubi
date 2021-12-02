@@ -20,7 +20,7 @@ import (
 )
 
 func main() {
-	b := NewBuilder(url.URL{})
+	b := NewBuilder(&url.URL{}) // or this parameter be nil
 	u := b.SetScheme("https").
 		SetHost("example.com:8080").
 		SetPaths("foo", "bar").
@@ -49,7 +49,7 @@ import (
 )
 
 func main() {
-	b0 := NewBuilder(url.URL{})
+	b0 := NewBuilder(&url.URL{})
 	b1 := b0.SetScheme("https").
 		SetHost("example.com")
 	fmt.Printf("b1: %s\n", b1.URL())

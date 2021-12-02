@@ -10,7 +10,7 @@ import (
 func TestBuilder(t *testing.T) {
 	var testCases []func()
 
-	b0 := NewBuilder(url.URL{})
+	b0 := NewBuilder(nil)
 
 	b1 := b0.SetScheme("https")
 	testCases = append(testCases, func() { assert.Equal(t, "https:", b1.URL().String()) })
@@ -65,31 +65,31 @@ func TestBuilder(t *testing.T) {
 
 func TestBuilder_SetHostWithEscaping(t *testing.T) {
 	u, _ := url.Parse("https://example.com")
-	b := NewBuilder(*u)
+	b := NewBuilder(u)
 	assert.Equal(t, "https://example%2F.com", b.SetHost("example/.com").URL().String())
 }
 
 func TestBuilder_SetPathsWithEscaping(t *testing.T) {
 	u, _ := url.Parse("https://example.com")
-	b := NewBuilder(*u)
+	b := NewBuilder(u)
 	assert.Equal(t, "https://example.com/foo%252Fbar/buz%253Fqux", b.SetPaths("foo/bar", "buz?qux").URL().String())
 }
 
 func TestBuilder_AppendPathsWithEscaping(t *testing.T) {
 	u, _ := url.Parse("https://example.com")
-	b := NewBuilder(*u)
+	b := NewBuilder(u)
 	assert.Equal(t, "https://example.com/foo%252Fbar/buz%253Fqux", b.AppendPaths("foo/bar", "buz?qux").URL().String())
 }
 
 func TestBuilder_SetQueryWithEscaping(t *testing.T) {
 	u, _ := url.Parse("https://example.com")
-	b := NewBuilder(*u)
+	b := NewBuilder(u)
 	assert.Equal(t, "https://example.com?foo%3Fbar=buz%26qux", b.SetQuery(url.Values{"foo?bar": []string{"buz&qux"}}).URL().String())
 }
 
 func TestBuilder_AddQueryWithEscaping(t *testing.T) {
 	u, _ := url.Parse("https://example.com")
-	b := NewBuilder(*u)
+	b := NewBuilder(u)
 	assert.Equal(t, "https://example.com?foo%3Fbar=buz%26qux", b.AddQuery(url.Values{"foo?bar": []string{"buz&qux"}}).URL().String())
 }
 
