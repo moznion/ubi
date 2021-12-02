@@ -92,11 +92,11 @@ func (b *Builder) URL() *url.URL {
 func (b *Builder) setPaths(originalPath string, paths ...string) *Builder {
 	u := *b.url
 
-	escapedPaths := make([]string, len(paths))
-	for i, p := range paths {
-		escapedPaths[i] = url.PathEscape(p)
+	joined := originalPath
+	for _, p := range paths {
+		joined = path.Join(joined, url.PathEscape(p))
 	}
 
-	u.Path = path.Join(originalPath, path.Join(escapedPaths...))
+	u.Path = joined
 	return NewBuilder(&u)
 }
