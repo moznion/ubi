@@ -1,4 +1,4 @@
-# ubi
+# ubi [![.github/workflows/check.yml](https://github.com/moznion/ubi/actions/workflows/check.yml/badge.svg)](https://github.com/moznion/ubi/actions/workflows/check.yml) [![codecov](https://codecov.io/gh/moznion/ubi/branch/main/graph/badge.svg?token=8GG9ECIHF7)](https://codecov.io/gh/moznion/ubi)
 
 URL Builder with Immutability for golang.
 
